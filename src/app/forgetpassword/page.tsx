@@ -16,7 +16,7 @@ const Signup: React.FC = () =>{
     const sentEmail = async () => { // 按下傳送驗證碼要做的動作
         console.log('打後端');
         try {
-            const response = await axios.post('http://35.189.180.59:40000/sign_up/', {
+            const response = await axios.post('http://35.189.180.59:40000/forget_send/', {
                 email: email
             }, {
                 headers: {
@@ -28,12 +28,12 @@ const Signup: React.FC = () =>{
             if (data.msg === "success") {
                 console.log("驗證碼發送成功:", data);
                 setKey(data.key); // 儲存返回的 key
-            } else if (data.msg === "invaild email") {
+            } else if (data.msg === "email error") {
                 console.log("無效的 email:", data);
-                // setMessage("無效的 email");
+                // setMessa ge("無效的 email");
                 setKey(""); // 清空 key
-            } else if (data.msg === "this email already exist") {
-                console.log("該 email 已經註冊過了", data);
+            } else if (data.msg === "this email has not registered yet") {
+                console.log("該email尚未註冊", data);
                 setKey(""); // 清空 key
             }
         } catch (error) {
@@ -44,9 +44,9 @@ const Signup: React.FC = () =>{
 
     const sentVCode = async () => { // 驗證驗證碼的動作
         if(Vcode==key){
-            //轉跳到頁面/addnewuser/
-            // 如果密碼正確，導航到 addnewuser 並附加email作為查詢參數
-            router.push(`/addnewuser?email=${encodeURIComponent(email)}`);
+            //轉跳到頁面/resetpassword/
+            // 如果密碼正確，導航到resetpassword並附加email作為查詢參數
+            router.push(`/resetpassword?email=${encodeURIComponent(email)}`);
         }else if(Vcode==null){
             alert("請輸入驗證碼！");
         }else{
@@ -58,7 +58,7 @@ const Signup: React.FC = () =>{
     return(
         <div className='flex flex-col items-center bg-gray-100 pb-32 gap-2'>
             <div className='text-xl text-gray-600'>To-Do Lister</div>
-            <div className='text-2xl'>Sign up!</div>
+            <div className='text-2xl'>重設密碼</div>
             <EmailInput email={email} setEmail={setEmail} />
             <button 
                 className='bg-gray-400 text-white rounded-md py-2 px-4 w-80'
