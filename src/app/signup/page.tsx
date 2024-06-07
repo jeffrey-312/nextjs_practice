@@ -12,7 +12,7 @@ const Signup: React.FC = () =>{
     const [Vcode, setVcode] = useState("");
     const [key, setKey] = useState(""); // 用於儲存返回的 key
     const router = useRouter(); // 初始化 useRouter
-
+    
     const sentEmail = async () => { // 按下傳送驗證碼要做的動作
         console.log('打後端');
         try {
@@ -42,10 +42,10 @@ const Signup: React.FC = () =>{
         }
     };
 
-    const sentVCode = async () => { // 驗證驗證碼的動作
+    const sentVCode = async () => { //要改到後端
         if(Vcode==key){
             //轉跳到頁面/addnewuser/
-            // 如果密碼正確，導航到 addnewuser 並附加email作為查詢參數
+            //如果密碼正確，導航到 addnewuser 並附加email作為查詢參數
             router.push(`/addnewuser?email=${encodeURIComponent(email)}`);
         }else if(Vcode==null){
             alert("請輸入驗證碼！");

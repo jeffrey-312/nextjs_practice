@@ -22,6 +22,7 @@ export default function resetpassword() {
         }else{
             try {
                 const response = await axios.post('http://35.189.180.59:40000/change_password/', {
+                    user_id : "none",    
                     email: email ,
                     new_password: password
                 }, {
@@ -35,8 +36,6 @@ export default function resetpassword() {
                     console.log("更改成功", data);
                     alert("更改成功！請重新登入~");
                     router.push(`/login`);
-
-    
                 } else if (data.msg === "email not in database") {
                     console.log("更改失敗", data);
                     alert("更改失敗，請再試一次！");

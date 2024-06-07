@@ -18,14 +18,12 @@ const Login: React.FC = () => {
                 },
                 body: JSON.stringify({
                     email: email,
-                    password: password
+                    password: password//加hash MD5
                 })
             });
-
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const data = await response.json();
             if (data.msg === "success") {
                 console.log("登入成功:", data);

@@ -43,16 +43,31 @@ const Signup: React.FC = () =>{
     };
 
     const sentVCode = async () => { // 驗證驗證碼的動作
-        if(Vcode==key){
-            //轉跳到頁面/resetpassword/
-            // 如果密碼正確，導航到resetpassword並附加email作為查詢參數
-            router.push(`/resetpassword?email=${encodeURIComponent(email)}`);
-        }else if(Vcode==null){
-            alert("請輸入驗證碼！");
-        }else{
-            alert("驗證碼錯誤！");
-            setVcode("");
+        console.log('驗證驗整碼');
+        //改回前端判斷
+        try {
+            const response = await axios.post('http://35.189.180.59:40000/verify_key/', {
+                email : email ,
+	            key : key
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response);
+            const data = response.data;
+            //改回前端判斷
+            if (data.msg === "success") {
+                console.log("驗證碼正確", data);
+                router.push(`/resetpassword?email=${encodeURIComponent(email)}`);//轉跳到頁面/resetpassword/並附加email作為查詢參數
+            } else if (data.msg === "fail") {
+                console.log("驗證碼錯誤", data);
+                alert("驗證碼錯誤！");
+            } 
+        } catch (error) {
+            console.error("發送驗證碼失敗:", error);
         }
+        ////
     };
 
     return(

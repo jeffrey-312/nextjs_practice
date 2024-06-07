@@ -24,7 +24,6 @@ const Todos = () => {
             setInputText("");
         }
     };
-
     return (  
         <div className='flex flex-col items-center gap-2 pt-8 bg-blue-200 pb-32'>
             <Title />
