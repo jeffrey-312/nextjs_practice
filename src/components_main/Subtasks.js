@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SubTasks = ({ task, expandedTasks, toggleTask}) => {
-
+  const user_id=sessionStorage.getItem('user_id');
     const handleChangeState = async () => {
         try {
           const response = await fetch('http://35.189.180.59:40000/change_small_state/', {
@@ -9,7 +9,7 @@ const SubTasks = ({ task, expandedTasks, toggleTask}) => {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ user_id : "46e3dfd8-b530-4cc3-8e26-ef709e4b3938" ,
+            body: JSON.stringify({ user_id : user_id ,
                                     name : task.name ,
                                     state : "delete" ,
                                     end : task.end ,

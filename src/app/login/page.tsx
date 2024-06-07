@@ -27,9 +27,9 @@ const Login: React.FC = () => {
             const data = await response.json();
             if (data.msg === "success") {
                 console.log("登入成功:", data);
-                localStorage.setItem('user_id', data.user_id);
+                sessionStorage.setItem('user_id', data.user_id);
                 alert('登入成功');
-                router.push("/todos");
+                router.push("/main_page");
             } else {
                 alert('請輸入正確的帳號密碼');
                 console.log("登入失敗:", data.msg);

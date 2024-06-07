@@ -6,6 +6,7 @@ import Popup2 from '@/components_main/Popup2';
 import Dailytasks from '@/components_main/Dailytasks';
 import Subtasks from '@/components_main/Subtasks';
 import SearchResults from '@/components_main/SearchResult';
+import { useRouter } from 'next/navigation'; // 從 next/navigation 引入 useRouter
 
 export default function Maintask({ maintask }) {
     const [tasks, setTasks] = useState(maintask || []);
@@ -20,11 +21,20 @@ export default function Maintask({ maintask }) {
     const [searchDate, setSearchDate] = useState('');
     const [searchResult, setSearchResult] = useState(null);
     const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
+    const user_id=sessionStorage.getItem('user_id');
+
+    const router = useRouter(); // 初始化 useRouter
+
+    if (!user_id) {//未登入
+      console.error('User ID not found in sessionStorage');
+      router.push("/login");
+      alert("請先登入");
+    }
   
     const handleSearch = async () => {
       const date = searchDate.trim() || 'none';
       const keyword = searchKeyword.trim() || 'none';
-  
+      
       try {
         const response = await fetch('http://35.189.180.59:40000/search_task/', {
           method: 'POST',
@@ -32,7 +42,7 @@ export default function Maintask({ maintask }) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            user_id: '46e3dfd8-b530-4cc3-8e26-ef709e4b3938',
+            user_id: user_id,
             date: date,
             keyword: keyword
           })
@@ -56,7 +66,9 @@ export default function Maintask({ maintask }) {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ user_id: '46e3dfd8-b530-4cc3-8e26-ef709e4b3938' })
+            body: JSON.stringify({ 
+              user_id: user_id 
+            })
           });
           const data = await response.json();
           setTasks(data.maintask);
@@ -95,7 +107,7 @@ export default function Maintask({ maintask }) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({user_id : "46e3dfd8-b530-4cc3-8e26-ef709e4b3938" ,
+          body: JSON.stringify({user_id : user_id ,
                               name : taskData.name ,
                               start : taskData.start.replace("T", " ") ,
                               end : taskData.end.replace("T", " ") ,
@@ -118,7 +130,7 @@ export default function Maintask({ maintask }) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({user_id : "46e3dfd8-b530-4cc3-8e26-ef709e4b3938" ,
+          body: JSON.stringify({user_id : user_id ,
                               name : taskData.name ,
                               end : taskData.end.replace("T", " ") ,
                               state : "processing" ,
