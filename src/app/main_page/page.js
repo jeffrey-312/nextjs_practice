@@ -41,7 +41,7 @@ export default function Maintask({ maintask }) {
         const keyword = searchKeyword.trim() || 'none';
 
         try {
-            const response = await fetch('http://35.189.180.59:40000/search_task/', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/search_task/`, {//反引號插入環境變數
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export default function Maintask({ maintask }) {
         if (userId) {
             async function fetchData() {
                 try {
-                    const response = await fetch('http://35.189.180.59:40000/get_todolist/', {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/get_todolist/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -122,7 +122,7 @@ export default function Maintask({ maintask }) {
 
     const handleAddTask = async (taskData) => {
         try {
-            const response = await fetch('http://35.189.180.59:40000/add_maintask/', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/add_maintask/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ export default function Maintask({ maintask }) {
 
     const handleAddDailyTask = async (taskData) => {
         try {
-            const response = await fetch('http://35.189.180.59:40000/add_small_task/', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/add_small_task/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
