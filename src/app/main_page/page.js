@@ -21,6 +21,7 @@ export default function Maintask({ maintask }) {
     const [searchResult, setSearchResult] = useState(null);
     const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
     const [userId, setUserId] = useState(null);
+    const [username, setUsername] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -32,6 +33,8 @@ export default function Maintask({ maintask }) {
                 router.push('/login');
             } else {
                 setUserId(userId);
+                const username = sessionStorage.getItem('username');
+                setUsername(username);
             }
         }
     }, [router]);
@@ -173,7 +176,7 @@ export default function Maintask({ maintask }) {
     return (
         <div className="container bg-slate-100">
             <div className="maintask">
-                <div>user name</div>{/* 要放入username */}
+                <div className='text-2xl text-gray-600'>User:{username}</div>{/* 要放入username */}
                 <div className='gap-2'>
                     <button className='bg-gray-400 text-white rounded-md w-20' onClick={logOut}>登出</button>
                     <button className='bg-gray-400 text-white rounded-md w-20' onClick={changePassword}>更改密碼</button>
@@ -275,6 +278,7 @@ export default function Maintask({ maintask }) {
                 .maintask {
                     grid-area: maintask;
                     width: 80%;
+                    gap: 16px;
                 }
                 .search {
                     grid-area: search;

@@ -16,7 +16,7 @@ const Signup: React.FC = () =>{
     const sentEmail = async () => { // 按下傳送驗證碼要做的動作
         console.log('打後端');
         try {
-            const response = await axios.post('http://35.189.180.59:40000/sign_up/', {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/sign_up/`, {
                 email: email
             }, {
                 headers: {

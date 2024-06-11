@@ -26,7 +26,7 @@ export default function resetpassword() {
             setPassword("");
         }else{
             try {
-                const response = await axios.post('http://35.189.180.59:40000/change_password/', {
+                const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/change_password/`, {
                     user_id : user_id,    
                     email: "none" ,
                     new_password: password
