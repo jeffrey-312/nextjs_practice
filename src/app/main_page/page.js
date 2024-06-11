@@ -174,8 +174,8 @@ export default function Maintask({ maintask }) {
     };
 
     return (
-        <div className="container bg-slate-100">
-            <div className="maintask">
+        <div className="container bg-slate-200">
+            <div className="maintask ">
                 <div className='text-2xl text-gray-600'>User:{username}</div>{/* 要放入username */}
                 <div className='gap-2'>
                     <button className='bg-gray-400 text-white rounded-md w-20' onClick={logOut}>登出</button>
@@ -210,7 +210,7 @@ export default function Maintask({ maintask }) {
                 )}
             </div>
 
-            <div className="search bg-slate-300 ">
+            <div className="search bg-slate-300 py-5 pl-4">
                 <h1>Search Tasks</h1>
                 <input
                     type="text"
@@ -226,7 +226,7 @@ export default function Maintask({ maintask }) {
                 <button className='bg-gray-400 text-white rounded-md w-1/4' onClick={handleSearch}>Search</button>
             </div>
 
-            <div className="dailytask bg-gray-300">
+            <div className="dailytask">
                 <h1>-------Today's task-------</h1>
                 <button className='bg-gray-400 text-white rounded-md w-1/2' onClick={() => setIsPopup2Open(true)}>Add Task</button>
                 <h1>Dailytask</h1>
